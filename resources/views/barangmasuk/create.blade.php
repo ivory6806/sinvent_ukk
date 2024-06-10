@@ -14,9 +14,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">TANGGAL MASUK</label>
-                                <input type="date" class="form-control @error('tgl_masuk') is-invalid @enderror" name="tgl_masuk" value="{{ old('tgl_masuk') }}" placeholder="Masukkan Tanggal Masuk Barang">
-                           
-                                <!-- error message untuk tgl_masuk -->
+                                <input type="date" id="tgl_masuk" class="form-control @error('tgl_masuk') is-invalid @enderror" name="tgl_masuk" value="{{ old('tgl_masuk') }}" placeholder="Masukkan Tanggal Masuk Barang">
                                 @error('tgl_masuk')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
@@ -24,11 +22,10 @@
                                 @enderror
                             </div>
 
+                            <!-- Jumlah Masuk -->
                             <div class="form-group">
                                 <label class="font-weight-bold">JUMLAH MASUK</label>
-                                <input type="number" min="1" class="form-control @error('qty_masuk') is-invalid @enderror" name="qty_masuk" value="{{ old('qty_masuk') }}" placeholder="Masukkan Jumlah Masuk Barang">
-                           
-                                <!-- error message untuk qty_masuk -->
+                                <input type="number" min="0" class="form-control @error('qty_masuk') is-invalid @enderror" name="qty_masuk" value="{{ old('qty_masuk', 1) }}" placeholder="Masukkan Jumlah Masuk Barang">
                                 @error('qty_masuk')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
@@ -63,4 +60,13 @@
             </div>
         </div>
     </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const dateField = document.getElementById('tgl_masuk');
+        if (!dateField.value) {
+            const today = new Date().toISOString().split('T')[0];
+            dateField.value = today;
+        }
+    });
+    </script>
 @endsection

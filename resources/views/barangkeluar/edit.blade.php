@@ -13,29 +13,26 @@
                             @csrf
                             @method('PUT')
 
-                            <div class="form-group">
-                                <label class="font-weight-bold">TANGGAL KELUAR</label>
-                                <input type="date" class="form-control @error('tgl_keluar') is-invalid @enderror" name="tgl_keluar" value="{{ old('tgl_keluar', $barangKeluar->tgl_keluar) }}" placeholder="Masukkan Tanggal Keluar Barang">
-                           
-                                <!-- error message untuk tgl_keluar -->
-                                @error('tgl_keluar')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">TANGGAL KELUAR</label>
+                            <input type="date" id="tgl_keluar" class="form-control @error('tgl_keluar') is-invalid @enderror" name="tgl_keluar" value="{{ old('tgl_keluar') }}" placeholder="Masukkan Tanggal Keluar Barang">
+                            @error('tgl_keluar')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
 
-                            <div class="form-group">
-                                <label class="font-weight-bold">JUMLAH KELUAR</label>
-                                <input type="number" min="0" class="form-control @error('qty_keluar') is-invalid @enderror" name="qty_keluar" value="{{ old('qty_keluar', $barangKeluar->qty_keluar) }}" placeholder="Masukkan Jumlah Keluar Barang">
-                           
-                                <!-- error message untuk qty_keluar -->
-                                @error('qty_keluar')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
+                        <!-- Jumlah Keluar -->
+                        <div class="form-group">
+                            <label class="font-weight-bold">JUMLAH KELUAR</label>
+                            <input type="number" min="0" class="form-control @error('qty_keluar') is-invalid @enderror" name="qty_keluar" value="{{ old('qty_keluar', 1) }}" placeholder="Masukkan Jumlah Keluar Barang">
+                            @error('qty_keluar')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
 
                             <div class="form-group">
                                 <label class="font-weight-bold">PILIH BARANG</label>

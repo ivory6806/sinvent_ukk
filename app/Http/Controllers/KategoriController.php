@@ -62,7 +62,7 @@ class KategoriController extends Controller
         // return $request->all();
 
         $this->validate($request, [
-            'deskripsi'   => 'required',
+            'deskripsi'   => 'required | unique',
             'kategori'    => 'required | in:M,A,BHP,BTHP',
         ]);
 
@@ -113,7 +113,7 @@ class KategoriController extends Controller
     public function update(Request $request, string $id)
     {
         $this->validate($request, [
-            'deskripsi'   => 'required',
+            'deskripsi'   => 'required | unique',
             'kategori'    => 'required',
         ]);
 

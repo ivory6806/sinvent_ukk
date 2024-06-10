@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Barang;
 use App\Models\BarangKeluar;
+use App\Models\BarangMasuk;
+use App\Models\Barang;
+
 use Illuminate\Http\Request;
-use DB;
 
 class BarangKeluarController extends Controller
 {
@@ -24,25 +25,36 @@ class BarangKeluarController extends Controller
     
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'tgl_keluar'     => 'required',
-            'qty_keluar'     => 'required',
-            'barang_id'     => 'required',
+        $request->validate([
+            'tgl_keluar'   => 'required|date',
+            'qty_keluar'   => 'required|numeric|min:1',
+            'barang_id'    => 'required|exists:barang,id',
         ]);
-
-        $barang = Barang::find($request->barang_id);
-
-        //Validasi jika jumlah qty_keluar lebih besar dari stok saat itu maka muncul pesan eror
+    
+        $tgl_keluar = $request->tgl_keluar;
+        $barang_id = $request->barang_id;
+    
+        // Check if there's any BarangMasuk with a date later than tgl_keluar
+        $existingBarangMasuk = BarangMasuk::where('barang_id', $barang_id)
+            ->where('tgl_masuk', '>', $tgl_keluar)
+            ->exists();
+    
+        if ($existingBarangMasuk) {
+            return redirect()->back()->withInput()->withErrors(['tgl_keluar' => 'Tanggal keluar tidak boleh mendahului tanggal masuk!']);
+        }
+    
+        $barang = Barang::find($barang_id);
+    
         if ($request->qty_keluar > $barang->stok) {
             return redirect()->back()->withInput()->withErrors(['qty_keluar' => 'Jumlah barang keluar melebihi stok!']);
         }
-
+    
         BarangKeluar::create([
-            'tgl_keluar'        => $request->tgl_keluar,
-            'qty_keluar'        => $request->qty_keluar,
-            'barang_id'        => $request->barang_id,
+            'tgl_keluar'  => $tgl_keluar,
+            'qty_keluar'  => $request->qty_keluar,
+            'barang_id'   => $barang_id,
         ]);
-
+    
         return redirect()->route('barangkeluar.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
     
@@ -73,28 +85,38 @@ class BarangKeluarController extends Controller
 
     public function update(Request $request, $id)
     {
-
-        $this->validate($request, [
-            'tgl_keluar'     => 'required',
-            'qty_keluar'     => 'required',
-            'barang_id'     => 'required',
+        $request->validate([
+            'tgl_keluar'   => 'required|date',
+            'qty_keluar'   => 'required|numeric|min:1',
+            'barang_id'    => 'required|exists:barang,id',
         ]);
-
-        $barang = Barang::find($request->barang_id);
-
-        //Validasi jika jumlah qty_keluar lebih besar dari stok saat itu maka muncul pesan eror
+    
+        $tgl_keluar = $request->tgl_keluar;
+        $barang_id = $request->barang_id;
+    
+        // Check if there's any BarangMasuk with a date later than tgl_keluar
+        $existingBarangMasuk = BarangMasuk::where('barang_id', $barang_id)
+            ->where('tgl_masuk', '>', $tgl_keluar)
+            ->exists();
+    
+        if ($existingBarangMasuk) {
+            return redirect()->back()->withInput()->withErrors(['tgl_keluar' => 'Tanggal keluar tidak boleh mendahului tanggal masuk!']);
+        }
+    
+        $barang = Barang::find($barang_id);
+    
         if ($request->qty_keluar > $barang->stok) {
             return redirect()->back()->withInput()->withErrors(['qty_keluar' => 'Jumlah barang keluar melebihi stok!']);
         }
-        
-        //update record barang keluar
+    
         $barangKeluar = BarangKeluar::findOrFail($id);
-            $barangKeluar->update([
-                'tgl_keluar' => $request->tgl_keluar,
-                'qty_keluar' => $request->qty_keluar,
-                'barang_id' => $request->barang_id,
-            ]);
-
+    
+        $barangKeluar->update([
+            'tgl_keluar'  => $tgl_keluar,
+            'qty_keluar'  => $request->qty_keluar,
+            'barang_id'   => $barang_id,
+        ]);
+    
         return redirect()->route('barangkeluar.index')->with(['success' => 'Data Berhasil Diupdate!']);
     }
 
