@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SmartKoding - Register</title>
+    <title>REGISTER</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('theme/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -65,18 +65,18 @@
                                     <button type="submit" class="btn btn-primary">Register Account</button>
                                 </div>
 
-                                <hr>
+                                <!-- <hr>
                                 <a href="index.html" class="btn btn-google btn-user btn-block">
                                     <i class="fab fa-google fa-fw"></i> Register with Google
                                 </a>
                                 <a href="index.html" class="btn btn-facebook btn-user btn-block">
                                     <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a>
+                                </a> -->
                             </form>
                             <hr>
-                            <div class="text-center">
+                            <!-- <div class="text-center">
                                 <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
+                            </div> -->
                             <div class="text-center">
                                 <a class="small" href="login">Already have an account? Login!</a>
                             </div>

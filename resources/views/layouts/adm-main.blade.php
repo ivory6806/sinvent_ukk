@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Smart Koding</title>
+    <title>UKK 2024</title>
 
     <!-- Custom fonts for this template-->
     <link href="{!! asset('theme/vendor/fontawesome-free/css/all.min.css') !!}" rel="stylesheet" type="text/css">
@@ -32,64 +32,61 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('barang.index')}}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SMARTKODING</div>
+                <div class="sidebar-brand-text mx-3">UKK-IVORY</div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <!-- <li class="nav-item active">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
-            </li>
+            </li> -->
 
             <!-- Divider -->
             <hr class="sidebar-divider">
             
             <!-- Heading -->
             <div class="sidebar-heading">
-                TABEL
+                Interfaces
             </div>
             
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ route('kategori.index')}}">
-                    <i class="fa fa-user-circle"></i>
-                    <span>Kategori</span>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Data Induk</span>
                 </a>
-            </li>
-            
-            <hr class="sidebar-divider my-0">
-            
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ route('barang.index')}}">
-                    <i class="fa fa-user-circle"></i>
-                    <span>Barang</span>
-                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('barang.index')}}">Barang</a>
+                        <a class="collapse-item" href="{{ route('kategori.index')}}">Kategori</a>
+                    </div>
+                </div>
             </li>
 
             <hr class="sidebar-divider my-0">
-            
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ route('barangmasuk.index')}}">
-                    <i class="fa fa-user-circle"></i>
-                    <span>Barang Masuk</span>
-                </a>
-            </li>
 
-            <hr class="sidebar-divider my-0">
-            
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ route('barangkeluar.index')}}">
-                    <i class="fa fa-user-circle"></i>
-                    <span>Barang Keluar</span>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Transaksi</span>
                 </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('barangmasuk.index')}}">Barang Masuk</a>
+                        <a class="collapse-item" href="{{ route('barangkeluar.index')}}">Barang Keluar</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->
@@ -288,7 +285,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <!-- <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -299,9 +296,9 @@
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
-                                </a>
+                                </a> -->
                                 
-                                <div class="dropdown-divider"></div>
+                                <!-- <div class="dropdown-divider"></div> -->
                                 <a class="dropdown-item" href="/logout">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
@@ -318,11 +315,11 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                    </div>
+                    </div> -->
 
                     
                     <div class="container">
