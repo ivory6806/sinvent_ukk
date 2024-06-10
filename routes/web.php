@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ShopController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LoginController;
@@ -21,16 +20,14 @@ use App\Http\Controllers\BarangKeluarController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
-Route::resource('shop', ShopController::class);
-
 Route::resource('barang', BarangController::class)->middleware('auth');
-Route::resource('kategori', KategoriController::class);
+Route::resource('kategori', KategoriController::class)->middleware('auth');
 
-Route::resource('barangmasuk', BarangMasukController::class);
-Route::resource('barangkeluar', BarangKeluarController::class);
+Route::resource('barangmasuk', BarangMasukController::class)->middleware('auth');
+Route::resource('barangkeluar', BarangKeluarController::class)->middleware('auth');
 
 Route::get('login', [LoginController::class,'index'])->name('login')->middleware('guest');
 Route::post('login', [LoginController::class,'authenticate']);
