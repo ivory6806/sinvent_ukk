@@ -13,31 +13,30 @@ class KategoriController extends Controller
 {
     public function index(Request $request)
     {
-    /**
-    * Display a listing of the resource.
-    */
+        // $rsetKategori = DB::table('kategori')
+        // ->select('id', 'deskripsi', DB::raw('ketKategorik(kategori) as ketkategorik'))
+        // ->orderBy('kategori', 'asc') // Menambahkan orderBy untuk mengurutkan berdasarkan deskripsi (kategori) secara ascending
+        // ->paginate(10);
 
-    // $rsetKategori = Kategori::infoKategori();
-    // return $rsetKategori;
+        // return view('kategori.index', compact('rsetKategori'))
+        // ->with('i', ($request->input('page', 1) - 1) * 10);
 
-        // $rsetKategori = DB::table('kategori')->select('id','kategori',DB::raw('ketKategori(jenis) as ketkategori'))->get();
-        // return $rsetKategori;
+        $keyword = $request->input('keyword');
 
-        // return DB::table('kategori')->get();
-
-    // memanggil store procedure
-        // return DB::select('CALL getKategoriAll()');
-
-    // memanggil store procedure dengan view
-        // $rsetKategori = DB::select('CALL getKategoriAll()');
-        // return view('v_smartkoding.index',compact('rsetKategori'));
-
-    $rsetKategori = Kategori::getKategoriAll()->paginate(10);
-    return view('kategori.index',compact('rsetKategori'))
-        ->with('i', (request()->input('page', 1) - 1) * 10);
+        // Query untuk mencari kategori berdasarkan keyword
+        $query = DB::table('kategori')
+            ->select('id', 'deskripsi', DB::raw('ketKategorik(kategori) as ketkategorik'))
+            ->orderBy('kategori', 'asc');
     
-    // $rsetKategori = DB::table('kategori')->select('id','deskripsi',DB::raw('ketKategorik(kategori) as ketkategorik'))->paginate(10);
-    // return view('kategori.index',compact('rsetKategori'))
+        if (!empty($keyword)) {
+            $query->where('deskripsi', 'LIKE', "%$keyword%")
+                  ->orWhereRaw('ketKategorik(kategori) COLLATE utf8mb4_unicode_ci LIKE ?', ["%$keyword%"]);
+        }
+    
+        $rsetKategori = $query->paginate(10);
+    
+        return view('kategori.index', compact('rsetKategori'))
+            ->with('i', ($request->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -62,7 +61,7 @@ class KategoriController extends Controller
         // return $request->all();
 
         $request->validate([
-            'deskripsi'   => 'required | unique',
+            'deskripsi'   => 'required',
             'kategori'    => 'required | in:M,A,BHP,BTHP',
         ]);
 
