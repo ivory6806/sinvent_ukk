@@ -32,6 +32,18 @@ class LoginController extends Controller
 
             return redirect()->intended('kategori');
         }
+        
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('barangmasuk');
+        }
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('barangkeluar');
+        }
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
