@@ -12,7 +12,19 @@ class BarangMasukController extends Controller
 {
     public function index(Request $request)
     {
-        $rsetBarangMasuk = BarangMasuk::with('barang')->latest()->paginate(10);
+        $keyword = $request->input('keyword');
+    
+        // Query untuk mencari barang masuk berdasarkan keyword
+        $rsetBarangMasuk = BarangMasuk::with('barang')
+            ->whereHas('barang', function ($query) use ($keyword) {
+                $query->where('merk', 'LIKE', "%$keyword%")
+                      ->orWhere('seri', 'LIKE', "%$keyword%")
+                      ->orWhere('spesifikasi', 'LIKE', "%$keyword%");
+            })
+            ->orWhere('tgl_masuk', 'LIKE', "%$keyword%")
+            ->orWhere('qty_masuk', 'LIKE', "%$keyword%")
+            ->paginate(10);
+    
         return view('barangmasuk.index', compact('rsetBarangMasuk'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }

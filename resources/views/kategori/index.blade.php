@@ -27,7 +27,7 @@
                     <form  method="GET"  action="{{ route('kategori.index') }}" class="form-inline my-2 my-lg-0">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" name="keyword" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                                aria-label="Search" aria-describedby="basic-addon2" value="{{ request()->input('keyword') }}">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit"> <!-- Perubahan di sini: menambahkan type="submit" -->
                                     <i class="fas fa-search fa-sm"></i>
@@ -39,7 +39,7 @@
                     <form  method="GET"  action="{{ route('kategori.index') }}" class="d-sm-none form-inline mr-auto w-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" name="keyword" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                                aria-label="Search" aria-describedby="basic-addon2" value="{{ request()->input('keyword') }}">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit"> <!-- Perubahan di sini: menambahkan type="submit" -->
                                     <i class="fas fa-search fa-sm"></i>

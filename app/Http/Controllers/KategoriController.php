@@ -61,7 +61,7 @@ class KategoriController extends Controller
         // return $request->all();
 
         $request->validate([
-            'deskripsi'   => 'required',
+            'deskripsi'   => 'required | unique:kategori,deskripsi',
             'kategori'    => 'required | in:M,A,BHP,BTHP',
         ]);
 
@@ -112,8 +112,8 @@ class KategoriController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'deskripsi'   => 'required | unique',
-            'kategori'    => 'required',
+            'deskripsi'   => 'required | unique:kategori,deskripsi',
+            'kategori'    => 'required | in:M,A,BHP,BTHP',
         ]);
 
         $rsetKategori = Kategori::find($id);
@@ -132,7 +132,7 @@ class KategoriController extends Controller
     {
         if (DB::table('barang')->where('kategori_id', $id)->exists()){
 
-            return redirect()->route('kategori.index')->with(['gagal' => 'Data Gagal Dihapus!']);
+            return redirect()->route('kategori.index')->with(['gagal' => 'Data Gagal Dihapus karena Kategori sudah digunakan Barang!']);
             
         } else {
 
